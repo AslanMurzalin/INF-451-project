@@ -1,0 +1,57 @@
+services:
+  web:
+    build: .
+    container_name: feedback_backend
+    restart: always
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      # If not set in .env, defaults to internal postgres container
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@db:5432/feedback_db}
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379/0}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - .:/app
+    command: >
+      sh -c "alembic upgrade head &&
+             python seed.py &&
+             uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+
+  # Local PostgreSQL container (Used when NOT connecting to an external Cloud DB like Neon/Supabase)
+  db:
+    image: postgres:16-alpine
+    container_name: feedback_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: feedback_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d feedback_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Redis service (For future caching & distributed rate-limiting)
+  redis:
+    image: redis:7-alpine
+    container_name: feedback_redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:

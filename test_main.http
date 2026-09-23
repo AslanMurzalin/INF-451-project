@@ -1,0 +1,94 @@
+### 1. Root & Health Check
+GET http://127.0.0.1:8000/
+Accept: application/json
+
+###
+GET http://127.0.0.1:8000/health
+Accept: application/json
+
+### 2. Login Option 1: Direct JSON Login (Admin)
+POST http://127.0.0.1:8000/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@university.edu",
+  "password": "AdminPassword123!"
+}
+
+> {% 
+    client.global.set("admin_token", response.body.access_token); 
+    client.global.set("refresh_token", response.body.refresh_token); 
+%}
+
+### 3. Login Option 2: OAuth2 Password Form (Swagger / OAuth2 Client flow)
+POST http://127.0.0.1:8000/api/v1/auth/token
+Content-Type: application/x-www-form-urlencoded
+
+username=alice.student@university.edu&password=StudentPassword123!
+
+> {% client.global.set("student_token", response.body.access_token); %}
+
+### 4. Refresh Access Token using Refresh Token (From localStorage)
+POST http://127.0.0.1:8000/api/v1/auth/refresh
+Content-Type: application/json
+
+{
+  "refresh_token": "{{refresh_token}}"
+}
+
+> {% client.global.set("admin_token", response.body.access_token); %}
+
+### 5. Get Current Profile (Works with Bearer Header or Cookie)
+GET http://127.0.0.1:8000/api/v1/auth/me
+Authorization: Bearer {{admin_token}}
+Accept: application/json
+
+### 6. Register a New Admin (Guarded by admin_secret)
+POST http://127.0.0.1:8000/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "full_name": "New Secondary Admin",
+  "email": "new.admin@university.edu",
+  "password": "NewAdminPass123!",
+  "role": "admin",
+  "admin_secret": "admin-secret-dev-key"
+}
+
+### 7. Logout (Clears HttpOnly Lax Cookie)
+POST http://127.0.0.1:8000/api/v1/auth/logout
+
+### 8. List Departments
+GET http://127.0.0.1:8000/api/v1/departments
+Authorization: Bearer {{admin_token}}
+Accept: application/json
+
+### 9. List Courses (US1.3)
+GET http://127.0.0.1:8000/api/v1/courses
+Authorization: Bearer {{admin_token}}
+Accept: application/json
+
+### 10. List Campus Services (US1.3)
+GET http://127.0.0.1:8000/api/v1/services
+Authorization: Bearer {{admin_token}}
+Accept: application/json
+
+### 11. List Campus Service Categories
+GET http://127.0.0.1:8000/api/v1/services/categories
+Authorization: Bearer {{admin_token}}
+Accept: application/json
+
+### 12. List Active Surveys (US1.2)
+GET http://127.0.0.1:8000/api/v1/surveys?status=active
+Authorization: Bearer {{admin_token}}
+Accept: application/json
+
+### 13. Get Feedback Source Types (US1.2)
+GET http://127.0.0.1:8000/api/v1/sources/types
+Authorization: Bearer {{admin_token}}
+Accept: application/json
+
+### 14. Get Feedback Sources Summary Dashboard (US1.2 / US1.3)
+GET http://127.0.0.1:8000/api/v1/sources/summary
+Authorization: Bearer {{admin_token}}
+Accept: application/json
