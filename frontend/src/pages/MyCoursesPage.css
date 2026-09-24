@@ -1,0 +1,114 @@
+.courses-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  width: 100%;
+}
+
+/* Student Profile Grid Card */
+.student-profile-table-wrapper {
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+
+.student-info-grid {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #71717a;
+  background-color: #ffffff;
+}
+
+.student-info-grid td {
+  border: 1px solid #71717a;
+  padding: 8px 12px;
+  font-family: var(--font-main);
+  font-size: 13px;
+}
+
+.student-info-grid .info-label {
+  width: 45%;
+  font-weight: 700;
+  color: #1e3a8a;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.student-info-grid .info-value {
+  color: #111827;
+  font-weight: 500;
+}
+
+/* Enrolled Courses Section */
+.enrolled-courses-section {
+  width: 100%;
+  max-width: 720px;
+}
+
+.enrolled-courses-header h2 {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.courses-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.courses-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #71717a;
+  background-color: #ffffff;
+}
+
+.courses-data-table th,
+.courses-data-table td {
+  border: 1px solid #71717a;
+  padding: 8px 12px;
+  font-family: var(--font-main);
+  font-size: 12px;
+  text-align: left;
+}
+
+.courses-data-table th {
+  background-color: #f8fafc;
+  color: #1e3a8a;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.course-title-cell {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.status-badge-active {
+  color: #16a34a;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.courses-status-state {
+  text-align: center;
+  padding: 24px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.courses-status-state.error {
+  color: #dc2626;
+}
+
+@media (max-width: 768px) {
+  .courses-page-container {
+    align-items: stretch;
+  }
+}

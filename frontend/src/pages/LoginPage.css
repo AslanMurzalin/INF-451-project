@@ -1,0 +1,212 @@
+.login-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Left diagonal blue wedge */
+.login-wedge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 42vw;
+  height: 100vh;
+  background-color: #2563eb;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Center card */
+.login-card-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 360px;
+  padding: 20px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Title & underline */
+.login-title-box {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-title {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.login-title-underline {
+  width: 90px;
+  height: 3px;
+  background-color: #2563eb;
+}
+
+/* Error message */
+.login-error-alert {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Underline inputs */
+.login-input-group {
+  position: relative;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+}
+
+.login-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid #4b5563;
+  padding: 8px 30px 8px 2px;
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  outline: none;
+  background: transparent;
+  transition: border-color 0.2s ease;
+}
+
+.login-input:focus {
+  border-bottom-color: #2563eb;
+}
+
+.login-input::placeholder {
+  color: #4b5563;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.login-input-icon {
+  position: absolute;
+  right: 4px;
+  bottom: 8px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  color: #1e293b;
+}
+
+/* Forgot password link */
+.login-forgot-row {
+  margin-top: -12px;
+  margin-bottom: 36px;
+}
+
+.login-forgot-link {
+  color: #2563eb;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+
+.login-forgot-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* Submit button (pill shape) */
+.login-button-row {
+  display: flex;
+  justify-content: center;
+}
+
+.login-submit-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 8px 38px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.login-submit-btn:hover:not(:disabled) {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.login-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Right-side Role indicator / switcher */
+.login-role-selector {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 2;
+}
+
+.login-role-item {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #94a3b8;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: right;
+  transition: color 0.15s ease;
+}
+
+.login-role-item:hover {
+  color: #475569;
+}
+
+.login-role-item.active {
+  color: #1e293b;
+}
+
+@media (max-width: 768px) {
+  .login-wedge {
+    width: 60vw;
+  }
+  
+  .login-role-selector {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 30px;
+  }
+}

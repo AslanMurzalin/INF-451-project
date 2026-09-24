@@ -1,0 +1,78 @@
+.admin-cs-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.admin-cs-wrapper {
+  width: 100%;
+  max-width: 680px;
+}
+
+.cs-subtitle {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #1e293b;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.cs-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.cs-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+}
+
+.cs-data-table th,
+.cs-data-table td {
+  padding: 8px 12px;
+  font-family: var(--font-main);
+  font-size: 12px;
+  text-align: left;
+  border-bottom: 1px solid #71717a;
+}
+
+.cs-data-table th {
+  border-top: 1px solid #71717a;
+  color: #1e3a8a;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.th-cs-name, .td-cs-name {
+  width: 48%;
+  font-weight: 700;
+  color: #111827;
+  border-right: 1px solid #71717a;
+}
+
+.th-cs-type, .td-cs-type {
+  width: 32%;
+  font-weight: 700;
+  color: #111827;
+  border-right: 1px solid #71717a;
+}
+
+.th-cs-status, .td-cs-status {
+  width: 20%;
+  font-weight: 700;
+  color: #111827;
+}
+
+.cs-loading {
+  padding: 24px;
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+}

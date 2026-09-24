@@ -1,0 +1,104 @@
+.view-feedback-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.view-feedback-subtitle {
+  color: #64748b;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  width: 100%;
+  max-width: 520px;
+  text-align: left;
+}
+
+.feedback-table-wrapper {
+  width: 100%;
+  max-width: 520px;
+  overflow-x: auto;
+}
+
+.feedback-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #71717a;
+  background-color: #ffffff;
+}
+
+.feedback-data-table th,
+.feedback-data-table td {
+  border: 1px solid #71717a;
+  padding: 6px 10px;
+  font-family: var(--font-main);
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.feedback-data-table th {
+  background-color: #ffffff;
+  color: #1e3a8a;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.th-id, .td-id {
+  width: 40px;
+  text-align: center !important;
+  color: #111827;
+  font-weight: 600;
+}
+
+.th-feedback, .td-feedback {
+  width: 220px;
+}
+
+.feedback-content-text {
+  font-weight: 600;
+  color: #111827;
+  word-break: break-word;
+}
+
+.feedback-course-subtext {
+  font-size: 10px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.th-date, .td-date {
+  width: 110px;
+  color: #111827;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.th-status, .td-status {
+  width: 90px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.status-sent {
+  color: #111827;
+}
+
+.status-done {
+  color: #16a34a; /* Vibrant green matching Figma */
+}
+
+.feedback-table-loading,
+.feedback-table-empty {
+  padding: 24px;
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+}

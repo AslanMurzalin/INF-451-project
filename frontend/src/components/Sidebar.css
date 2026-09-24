@@ -1,0 +1,114 @@
+.sis-sidebar {
+  width: 170px;
+  min-width: 170px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  user-select: none;
+}
+
+/* HOME PAGE button */
+.sis-sidebar-home-btn {
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  background-color: #dce4f7;
+  color: #1e3a8a;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-align: left;
+  border-radius: 2px;
+  margin-bottom: 22px;
+  transition: background-color 0.15s ease;
+}
+
+.sis-sidebar-home-btn:hover {
+  background-color: #cbd8f5;
+}
+
+/* Admin Home Avatar Silhouette */
+.sis-sidebar-avatar-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  padding: 4px 0 16px 8px;
+}
+
+/* MAIN SECTION Label */
+.sis-sidebar-section-title {
+  color: #1e293b;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 2px 4px 6px 4px;
+}
+
+/* Nav links */
+.sis-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sis-sidebar-nav-item {
+  display: block;
+  width: 100%;
+  padding: 4px 6px;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  color: #1e293b;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  text-align: left;
+  border-radius: 1px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.sis-sidebar-nav-item:hover {
+  background-color: #f1f5f9;
+}
+
+/* Active Highlight - grey background matching Figma */
+.sis-sidebar-nav-item.active {
+  background-color: #d1d5db;
+  color: #000000;
+}
+
+/* Exit button */
+.sis-sidebar-exit-btn {
+  color: #000000;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.sis-sidebar-exit-btn:hover {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+@media (max-width: 768px) {
+  .sis-sidebar {
+    width: 100%;
+    min-width: 100%;
+    padding: 8px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 16px;
+  }
+
+  .sis-sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .sis-sidebar-nav-item {
+    width: auto;
+    padding: 6px 10px;
+    border: 1px solid #e2e8f0;
+  }
+}

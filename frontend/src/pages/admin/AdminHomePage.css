@@ -1,0 +1,39 @@
+.admin-home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 36px;
+}
+
+.admin-profile-table-wrapper {
+  width: 100%;
+  max-width: 480px;
+}
+
+.admin-profile-grid {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #71717a;
+  background-color: #ffffff;
+}
+
+.admin-profile-grid td {
+  border: 1px solid #71717a;
+  padding: 8px 12px;
+  font-family: var(--font-main);
+  font-size: 13px;
+}
+
+.admin-info-label {
+  width: 40%;
+  font-weight: 700;
+  color: #1e3a8a;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.admin-info-value {
+  color: #111827;
+  font-weight: 500;
+}

@@ -1,0 +1,48 @@
+/* Global CSS Reset & Base Design Tokens */
+:root {
+  --font-main: 'Roboto Condensed', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Oswald', 'Roboto Condensed', sans-serif;
+  
+  --color-primary-blue: #1d4ed8;
+  --color-accent-blue: #2563eb;
+  --color-light-blue-bg: #dce4f7;
+  --color-subtext-blue: #64748b;
+  --color-active-grey: #d1d5db;
+  --color-hover-grey: #e5e7eb;
+  --color-border-dark: #374151;
+  --color-border-light: #9ca3af;
+  --color-text-dark: #111827;
+  --color-text-muted: #4b5563;
+  --color-success: #16a34a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  font-family: var(--font-main);
+  color: var(--color-text-dark);
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, select, textarea {
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
