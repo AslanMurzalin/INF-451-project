@@ -3,71 +3,209 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 .dashboard-content-wrapper {
   width: 100%;
-  max-width: 520px;
+  max-width: 860px;
 }
 
 .dashboard-overview-label {
+  color: #64748b;
   font-family: var(--font-main);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  color: #1e293b;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   text-align: left;
 }
 
-.dashboard-table-wrapper {
+/* Shortcut Cards Grid */
+.admin-shortcut-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.shortcut-card {
+  border: 1px solid #71717a;
+  background-color: #ffffff;
+  padding: 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+.shortcut-card:hover {
+  background-color: #f8fafc;
+  transform: translateY(-2px);
+}
+
+.primary-card {
+  border-left: 4px solid #1e3a8a;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.card-tag {
+  font-size: 9px;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.card-count {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.card-title {
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.card-desc {
+  font-size: 10.5px;
+  color: #475569;
+  line-height: 1.35;
+  margin-bottom: 10px;
+  flex: 1;
+}
+
+.card-link-text {
+  font-size: 10px;
+  font-weight: 700;
+  color: #1e3a8a;
+  letter-spacing: 0.3px;
+}
+
+/* Metrics Section */
+.dashboard-metrics-section,
+.recent-feedbacks-section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1e3a8a;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.section-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.view-all-btn {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1e3a8a;
+  cursor: pointer;
+}
+
+.view-all-btn:hover {
+  text-decoration: underline;
+}
+
+.dashboard-table-wrapper,
+.recent-table-wrapper {
   width: 100%;
   overflow-x: auto;
 }
 
-.dashboard-metrics-table {
+.dashboard-metrics-table,
+.recent-data-table {
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid #71717a;
   background-color: #ffffff;
 }
 
 .dashboard-metrics-table th,
-.dashboard-metrics-table td {
-  padding: 8px 12px;
+.dashboard-metrics-table td,
+.recent-data-table th,
+.recent-data-table td {
+  border: 1px solid #71717a;
+  padding: 6px 10px;
   font-family: var(--font-main);
-  font-size: 12px;
+  font-size: 11.5px;
   text-align: left;
-  border-bottom: 1px solid #71717a;
 }
 
-.dashboard-metrics-table th {
-  border-top: 1px solid #71717a;
+.dashboard-metrics-table th,
+.recent-data-table th {
+  background-color: #f1f5f9;
   color: #1e3a8a;
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-}
-
-.th-card, .td-card {
-  width: 75%;
-  font-weight: 700;
-  color: #111827;
-  letter-spacing: 0.5px;
-  border-right: 1px solid #71717a;
+  font-size: 10.5px;
 }
 
 .th-number, .td-number {
-  width: 25%;
+  width: 120px;
+  text-align: center !important;
+}
+
+.pending-num {
+  color: #d97706;
+}
+
+.table-link-btn {
+  padding: 2px 8px;
+  border: 1px solid #1e3a8a;
+  background-color: #ffffff;
+  color: #1e3a8a;
+  font-size: 10px;
   font-weight: 700;
-  color: #111827;
-  padding-left: 16px;
+  cursor: pointer;
+}
+
+.table-link-btn:hover {
+  background-color: #1e3a8a;
+  color: #ffffff;
+}
+
+.recent-row {
+  cursor: pointer;
+}
+
+.recent-row:hover {
+  background-color: #f8fafc;
 }
 
 .dashboard-loading {
-  padding: 24px;
+  padding: 30px;
   text-align: center;
   color: #64748b;
   font-size: 13px;
+  border: 1px solid #71717a;
+  background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .admin-shortcut-cards-grid {
+    grid-template-columns: 1fr;
+  }
 }

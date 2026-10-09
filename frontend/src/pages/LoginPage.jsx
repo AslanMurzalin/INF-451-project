@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import { UserIcon, LockIcon } from '../assets/icons';
 import './LoginPage.css';
 
 export function LoginPage() {
   const { login } = useAuth();
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,7 +17,12 @@ export function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const from = location.state?.from?.pathname || '/courses';
+  // Reset zoom on login page to prevent squishing
+  useEffect(() => {
+    if (document.documentElement) {
+      document.documentElement.style.zoom = '100%';
+    }
+  }, []);
 
   const handleRoleSelect = (role) => {
     setActiveRole(role);
@@ -52,7 +59,7 @@ export function LoginPage() {
   };
 
   return (
-    <div className="login-container">
+    <div className={`login-container ${theme === 'dark' ? 'login-dark' : ''}`}>
       {/* Left blue decorative wedge polygon matching Figma */}
       <div className="login-wedge"></div>
 
@@ -83,7 +90,7 @@ export function LoginPage() {
               required
             />
             <div className="login-input-icon">
-              <UserIcon size={20} color="#1e293b" />
+              <UserIcon size={20} color="currentColor" />
             </div>
           </div>
 
@@ -100,7 +107,7 @@ export function LoginPage() {
               required
             />
             <div className="login-input-icon">
-              <LockIcon size={20} color="#1e293b" />
+              <LockIcon size={20} color="currentColor" />
             </div>
           </div>
 

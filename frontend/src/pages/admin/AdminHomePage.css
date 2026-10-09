@@ -18,11 +18,20 @@
   background-color: #ffffff;
 }
 
+[data-theme="dark"] .admin-profile-grid {
+  background-color: #1e293b;
+  border-color: #475569;
+}
+
 .admin-profile-grid td {
   border: 1px solid #71717a;
   padding: 8px 12px;
   font-family: var(--font-main);
   font-size: 13px;
+}
+
+[data-theme="dark"] .admin-profile-grid td {
+  border-color: #475569;
 }
 
 .admin-info-label {
@@ -33,7 +42,15 @@
   text-transform: uppercase;
 }
 
+[data-theme="dark"] .admin-info-label {
+  color: #60a5fa;
+}
+
 .admin-info-value {
   color: #111827;
   font-weight: 500;
+}
+
+[data-theme="dark"] .admin-info-value {
+  color: #f8fafc;
 }

@@ -3,6 +3,10 @@
   background-color: #ffffff;
 }
 
+[data-theme="dark"] .sis-header {
+  background-color: #0f172a;
+}
+
 .sis-header-top {
   display: flex;
   align-items: center;
@@ -17,12 +21,82 @@
 }
 
 .sis-header-system-title {
-  color: var(--color-primary-blue);
+  color: #1d4ed8;
   font-family: var(--font-main);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  flex: 1;
+}
+
+[data-theme="dark"] .sis-header-system-title {
+  color: #60a5fa;
+}
+
+.sis-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sis-header-theme-toggle-btn {
+  padding: 4px 10px;
+  border: 1px solid #71717a;
+  background-color: #ffffff;
+  color: #111827;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .sis-header-theme-toggle-btn {
+  background-color: #1e293b;
+  border-color: #475569;
+  color: #f8fafc;
+}
+
+.sis-header-theme-toggle-btn:hover {
+  background-color: #f1f5f9;
+}
+
+[data-theme="dark"] .sis-header-theme-toggle-btn:hover {
+  background-color: #334155;
+}
+
+.sis-header-settings-btn {
+  padding: 4px 10px;
+  border: 1px solid #71717a;
+  background-color: #ffffff;
+  color: #1e3a8a;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .sis-header-settings-btn {
+  background-color: #1e293b;
+  border-color: #475569;
+  color: #60a5fa;
+}
+
+.sis-header-settings-btn:hover {
+  background-color: #1e3a8a;
+  color: #ffffff;
+  border-color: #1e3a8a;
+}
+
+[data-theme="dark"] .sis-header-settings-btn:hover {
+  background-color: #2563eb;
+  color: #ffffff;
 }
 
 .sis-header-page-title h1 {
@@ -34,6 +108,10 @@
   text-transform: uppercase;
   margin: 0;
   padding-left: 2px;
+}
+
+[data-theme="dark"] .sis-header-page-title h1 {
+  color: #f8fafc;
 }
 
 @media (max-width: 768px) {

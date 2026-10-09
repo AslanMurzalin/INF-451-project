@@ -25,8 +25,17 @@
   transition: background-color 0.15s ease;
 }
 
+[data-theme="dark"] .sis-sidebar-home-btn {
+  background-color: #1e3a8a;
+  color: #f8fafc;
+}
+
 .sis-sidebar-home-btn:hover {
   background-color: #cbd8f5;
+}
+
+[data-theme="dark"] .sis-sidebar-home-btn:hover {
+  background-color: #2563eb;
 }
 
 /* Admin Home Avatar Silhouette */
@@ -34,17 +43,11 @@
   display: flex;
   justify-content: flex-start;
   padding: 4px 0 16px 8px;
+  color: #000000;
 }
 
-/* MAIN SECTION Label */
-.sis-sidebar-section-title {
-  color: #1e293b;
-  font-family: var(--font-main);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  padding: 2px 4px 6px 4px;
+[data-theme="dark"] .sis-sidebar-avatar-wrapper {
+  color: #f8fafc;
 }
 
 /* Nav links */
@@ -69,14 +72,29 @@
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
+[data-theme="dark"] .sis-sidebar-nav-item {
+  color: #cbd5e1;
+}
+
 .sis-sidebar-nav-item:hover {
   background-color: #f1f5f9;
 }
 
-/* Active Highlight - grey background matching Figma */
+[data-theme="dark"] .sis-sidebar-nav-item:hover {
+  background-color: #334155;
+  color: #f8fafc;
+}
+
+/* Active Highlight */
 .sis-sidebar-nav-item.active {
   background-color: #d1d5db;
   color: #000000;
+}
+
+[data-theme="dark"] .sis-sidebar-nav-item.active {
+  background-color: #334155;
+  color: #60a5fa;
+  border-left: 3px solid #60a5fa;
 }
 
 /* Exit button */
@@ -86,9 +104,18 @@
   margin-top: 4px;
 }
 
+[data-theme="dark"] .sis-sidebar-exit-btn {
+  color: #f8fafc;
+}
+
 .sis-sidebar-exit-btn:hover {
   background-color: #fee2e2;
   color: #b91c1c;
+}
+
+[data-theme="dark"] .sis-sidebar-exit-btn:hover {
+  background-color: #450a0a;
+  color: #fca5a5;
 }
 
 @media (max-width: 768px) {

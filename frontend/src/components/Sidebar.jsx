@@ -30,17 +30,12 @@ export function Sidebar() {
         HOME PAGE
       </NavLink>
 
-      {/* Admin Home Avatar Icon (matches media_1790261533531.jpg) */}
+      {/* Admin Home Avatar Icon */}
       {isAdmin && isHomeActive && (
         <div className="sis-sidebar-avatar-wrapper">
-          <AvatarSilhouette size={54} color="#000000" />
+          <AvatarSilhouette size={54} color="currentColor" />
         </div>
       )}
-
-      {/* Main Section Header */}
-      <div className="sis-sidebar-section-title">
-        MAIN SECTION
-      </div>
 
       {/* Navigation List based on Role */}
       <nav className="sis-sidebar-nav">
@@ -51,6 +46,20 @@ export function Sidebar() {
               className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
             >
               DASHBOARD
+            </NavLink>
+
+            <NavLink
+              to="/admin/feedbacks"
+              className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
+            >
+              ALL FEEDBACKS
+            </NavLink>
+
+            <NavLink
+              to="/admin/surveys-results"
+              className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
+            >
+              SURVEY RESULTS
             </NavLink>
 
             <NavLink
@@ -65,6 +74,13 @@ export function Sidebar() {
               className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
             >
               COURSES & SERVICES
+            </NavLink>
+
+            <NavLink
+              to="/admin/settings"
+              className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
+            >
+              SETTINGS
             </NavLink>
           </>
         ) : (
@@ -85,10 +101,31 @@ export function Sidebar() {
             </NavLink>
 
             <NavLink
+              to="/surveys"
+              className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
+            >
+              ACTIVE SURVEYS
+            </NavLink>
+
+            <NavLink
+              to="/services"
+              className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
+            >
+              CAMPUS SERVICES
+            </NavLink>
+
+            <NavLink
               to="/feedback/view"
               className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
             >
               VIEW MY FEEDBACK
+            </NavLink>
+
+            <NavLink
+              to="/settings"
+              className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
+            >
+              SETTINGS
             </NavLink>
           </>
         )}

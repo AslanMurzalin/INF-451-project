@@ -2,11 +2,16 @@
   position: relative;
   width: 100vw;
   height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.login-container.login-dark {
+  background-color: #0f172a;
 }
 
 /* Left diagonal blue wedge */
@@ -20,6 +25,10 @@
   clip-path: polygon(0 0, 100% 0, 0 100%);
   z-index: 1;
   pointer-events: none;
+}
+
+.login-dark .login-wedge {
+  background-color: #1e40af;
 }
 
 /* Center card */
@@ -54,10 +63,18 @@
   margin-bottom: 6px;
 }
 
+.login-dark .login-title {
+  color: #f8fafc;
+}
+
 .login-title-underline {
   width: 90px;
   height: 3px;
   background-color: #2563eb;
+}
+
+.login-dark .login-title-underline {
+  background-color: #3b82f6;
 }
 
 /* Error message */
@@ -93,8 +110,17 @@
   transition: border-color 0.2s ease;
 }
 
+.login-dark .login-input {
+  border-bottom-color: #64748b;
+  color: #f8fafc;
+}
+
 .login-input:focus {
   border-bottom-color: #2563eb;
+}
+
+.login-dark .login-input:focus {
+  border-bottom-color: #3b82f6;
 }
 
 .login-input::placeholder {
@@ -102,6 +128,10 @@
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.5px;
+}
+
+.login-dark .login-input::placeholder {
+  color: #94a3b8;
 }
 
 .login-input-icon {
@@ -112,6 +142,10 @@
   align-items: center;
   pointer-events: none;
   color: #1e293b;
+}
+
+.login-dark .login-input-icon {
+  color: #cbd5e1;
 }
 
 /* Forgot password link */
@@ -128,6 +162,10 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
   transition: opacity 0.2s;
+}
+
+.login-dark .login-forgot-link {
+  color: #60a5fa;
 }
 
 .login-forgot-link:hover {
@@ -195,6 +233,10 @@
 
 .login-role-item.active {
   color: #1e293b;
+}
+
+.login-dark .login-role-item.active {
+  color: #f8fafc;
 }
 
 @media (max-width: 768px) {
