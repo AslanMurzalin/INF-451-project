@@ -1,12 +1,14 @@
 const STORAGE_KEY = 'student_feedbacks';
 
-const INITIAL_FEEDBACKS = [
+export const INITIAL_FEEDBACKS = [
   {
     id: 1,
     sourceType: 'COURSE_EVALUATION',
     sourceDisplayName: 'COURSE EVALUATION',
     targetId: 1,
     targetTitle: 'INF451 - Advanced Software Architecture',
+    department: 'Computer Science & Engineering',
+    lecturerName: 'Dr. Alan Smith',
     studentName: 'Alice Johnson',
     studentEmail: 'alice.student@university.edu',
     rating: 5,
@@ -31,7 +33,9 @@ const INITIAL_FEEDBACKS = [
     sourceType: 'SERVICE_REVIEW',
     sourceDisplayName: 'CAMPUS SERVICE REVIEW',
     targetId: 3,
-    targetTitle: 'IT Helpdesk & Tech Support',
+    targetTitle: 'IT Helpdesk & Systems Support',
+    department: 'Campus Facilities & Services',
+    lecturerName: '',
     studentName: 'Anonymous Student',
     studentEmail: '',
     category: 'IT Support',
@@ -55,7 +59,9 @@ const INITIAL_FEEDBACKS = [
     sourceType: 'SURVEY',
     sourceDisplayName: 'AD-HOC SURVEY',
     targetId: 2,
-    targetTitle: 'Digital Learning & LMS Platform Satisfaction',
+    targetTitle: 'Spring 2026 End-of-Term General Satisfaction Survey',
+    department: 'Information Systems',
+    lecturerName: '',
     studentName: 'Alice Johnson',
     studentEmail: 'alice.student@university.edu',
     rating: 5,
@@ -78,9 +84,11 @@ const INITIAL_FEEDBACKS = [
     sourceType: 'SURVEY',
     sourceDisplayName: 'AD-HOC SURVEY',
     targetId: 1,
-    targetTitle: 'Fall 2026 Campus Life & Well-Being Survey',
-    studentName: 'David Miller',
-    studentEmail: 'david.m@university.edu',
+    targetTitle: 'Fall 2026 Mid-Semester Campus Experience Survey',
+    department: 'Campus Facilities & Services',
+    lecturerName: '',
+    studentName: 'Bob Miller',
+    studentEmail: 'bob.student@university.edu',
     rating: 4,
     criteria: {
       'Agreement Score': 4,
@@ -101,7 +109,9 @@ const INITIAL_FEEDBACKS = [
     sourceType: 'SERVICE_REVIEW',
     sourceDisplayName: 'CAMPUS SERVICE REVIEW',
     targetId: 2,
-    targetTitle: 'Campus Cafeteria & Food Court',
+    targetTitle: 'Main Campus Cafeteria',
+    department: 'Campus Facilities & Services',
+    lecturerName: '',
     studentName: 'Anonymous Student',
     studentEmail: '',
     category: 'Cafeteria',
@@ -119,6 +129,84 @@ const INITIAL_FEEDBACKS = [
     feedbackDate: '03.10.2026',
     status: 'SENT',
     responseNote: ''
+  },
+  {
+    id: 6,
+    sourceType: 'COURSE_EVALUATION',
+    sourceDisplayName: 'COURSE EVALUATION',
+    targetId: 2,
+    targetTitle: 'CS302 - Operating Systems & Distributed Architecture',
+    department: 'Computer Science & Engineering',
+    lecturerName: 'Dr. Alan Smith',
+    studentName: 'Bob Miller',
+    studentEmail: 'bob.student@university.edu',
+    rating: 5,
+    criteria: {
+      'Course Content': 5,
+      'Instructor Clarity': 5,
+      'Workload Balance': 4,
+    },
+    customAnswers: {
+      'strengths': 'Kernel threads and memory paging labs gave deep insights into OS internals.'
+    },
+    semester: 'Fall 2026',
+    feedback: 'Dr. Alan Smith provides clear breakdowns of complex concurrency primitives and synchronization locks. Highly recommended course.',
+    isAnonymous: false,
+    feedbackDate: '10.10.2026',
+    status: 'DONE',
+    responseNote: 'Great performance in the laboratory sessions! Keep exploring distributed systems architectures.'
+  },
+  {
+    id: 7,
+    sourceType: 'COURSE_EVALUATION',
+    sourceDisplayName: 'COURSE EVALUATION',
+    targetId: 3,
+    targetTitle: 'AI401 - Deep Learning & Natural Language Understanding',
+    department: 'Data Science & Artificial Intelligence',
+    lecturerName: 'Dr. Sarah Connor',
+    studentName: 'Alice Johnson',
+    studentEmail: 'alice.student@university.edu',
+    rating: 4,
+    criteria: {
+      'Course Content': 5,
+      'Instructor Clarity': 4,
+      'Workload Balance': 3,
+    },
+    customAnswers: {
+      'strengths': 'Hands-on transformer architecture assignments and PyTorch code walkthroughs.'
+    },
+    semester: 'Fall 2026',
+    feedback: 'The lectures on attention mechanisms and large language models are cutting-edge. The second homework had a steep GPU training curve, but tutor sessions were helpful.',
+    isAnonymous: false,
+    feedbackDate: '18.10.2026',
+    status: 'IN_REVIEW',
+    responseNote: 'GPU cluster quotas for students have been increased to ensure smoother training runs.'
+  },
+  {
+    id: 8,
+    sourceType: 'COURSE_EVALUATION',
+    sourceDisplayName: 'COURSE EVALUATION',
+    targetId: 1,
+    targetTitle: 'INF451 - Advanced Software Architecture',
+    department: 'Computer Science & Engineering',
+    lecturerName: 'Dr. Alan Smith',
+    studentName: 'Anonymous Student',
+    studentEmail: '',
+    rating: 4,
+    criteria: {
+      'Course Content': 4,
+      'Instructor Clarity': 5,
+      'Workload Balance': 4,
+    },
+    customAnswers: {
+      'strengths': 'Clean code architecture and domain-driven design principles.'
+    },
+    semester: 'Fall 2026',
+    feedback: 'Lecturer explains architectural trade-offs very effectively. Would love to have more recorded lecture recaps before midterms.',
+    isAnonymous: true,
+    feedbackDate: '21.10.2026',
+    status: 'SENT',
+    responseNote: ''
   }
 ];
 
@@ -130,6 +218,63 @@ function formatDate(date) {
   return `${day}.${month}.${year}`;
 }
 
+export function parseFeedbackDate(dateStr) {
+  if (!dateStr) return null;
+  const dotParts = dateStr.split('.');
+  if (dotParts.length === 3) {
+    const day = parseInt(dotParts[0], 10);
+    const month = parseInt(dotParts[1], 10) - 1;
+    const year = parseInt(dotParts[2], 10);
+    return new Date(year, month, day);
+  }
+  const dashParts = dateStr.split('-');
+  if (dashParts.length === 3) {
+    const year = parseInt(dashParts[0], 10);
+    const month = parseInt(dashParts[1], 10) - 1;
+    const day = parseInt(dashParts[2], 10);
+    return new Date(year, month, day);
+  }
+  const d = new Date(dateStr);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+export function enrichFeedback(item) {
+  let dept = item.department;
+  let lecturer = item.lecturerName;
+
+  if (!dept) {
+    const title = (item.targetTitle || '').toLowerCase();
+    if (title.includes('inf451') || title.includes('cs302') || title.includes('computer science') || title.includes('software')) {
+      dept = 'Computer Science & Engineering';
+    } else if (title.includes('ai401') || title.includes('deep learning') || title.includes('data science') || title.includes('artificial intelligence')) {
+      dept = 'Data Science & Artificial Intelligence';
+    } else if (title.includes('information') || title.includes('systems') || title.includes('lms')) {
+      dept = 'Information Systems';
+    } else if (title.includes('math') || title.includes('statistics')) {
+      dept = 'Mathematics & Statistics';
+    } else if (item.sourceType === 'SERVICE_REVIEW' || title.includes('library') || title.includes('cafeteria') || title.includes('helpdesk') || title.includes('sports') || title.includes('facility')) {
+      dept = 'Campus Facilities & Services';
+    } else {
+      dept = 'General University';
+    }
+  }
+
+  if (!lecturer) {
+    const title = (item.targetTitle || '').toLowerCase();
+    if (title.includes('inf451') || title.includes('cs302')) {
+      lecturer = 'Dr. Alan Smith';
+    } else if (title.includes('ai401')) {
+      lecturer = 'Dr. Sarah Connor';
+    }
+  }
+
+  return {
+    ...item,
+    department: dept,
+    lecturerName: lecturer || '',
+  };
+}
+
 export const feedbackService = {
   async getFeedbacks(sourceTypeFilter = null, statusFilter = null) {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -139,13 +284,23 @@ export const feedbackService = {
       list = INITIAL_FEEDBACKS;
     } else {
       try {
-        list = JSON.parse(raw);
+        const parsed = JSON.parse(raw);
+        // If parsed has fewer items than default, merge or ensure initial ones exist
+        if (Array.isArray(parsed) && parsed.length < INITIAL_FEEDBACKS.length) {
+          const existingIds = new Set(parsed.map(p => p.id));
+          const missing = INITIAL_FEEDBACKS.filter(init => !existingIds.has(init.id));
+          list = [...parsed, ...missing];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        } else {
+          list = Array.isArray(parsed) ? parsed : INITIAL_FEEDBACKS;
+        }
       } catch {
         list = INITIAL_FEEDBACKS;
       }
     }
 
-    let result = list;
+    let result = list.map(enrichFeedback);
+
     if (sourceTypeFilter && sourceTypeFilter !== 'ALL') {
       result = result.filter(item => item.sourceType === sourceTypeFilter);
     }
@@ -165,6 +320,8 @@ export const feedbackService = {
     sourceDisplayName = '',
     targetId = null,
     targetTitle = '',
+    department = '',
+    lecturerName = '',
     studentName = 'Alice Johnson',
     studentEmail = 'alice.student@university.edu',
     category = '',
@@ -178,12 +335,14 @@ export const feedbackService = {
     const feedbacks = await this.getFeedbacks();
     const nextId = feedbacks.length > 0 ? Math.max(...feedbacks.map(f => f.id || 0)) + 1 : 1;
 
-    const newFeedback = {
+    const newFeedback = enrichFeedback({
       id: nextId,
       sourceType,
       sourceDisplayName: sourceDisplayName || sourceType.replace(/_/g, ' '),
       targetId: targetId ? Number(targetId) : null,
       targetTitle: targetTitle || 'General Feedback',
+      department: department || 'Computer Science & Engineering',
+      lecturerName: lecturerName || '',
       studentName: isAnonymous ? 'Anonymous Student' : (studentName || 'Student'),
       studentEmail: isAnonymous ? '' : (studentEmail || ''),
       category: category || undefined,
@@ -196,7 +355,7 @@ export const feedbackService = {
       feedbackDate: formatDate(new Date()),
       status: 'SENT',
       responseNote: '',
-    };
+    });
 
     const updated = [newFeedback, ...feedbacks];
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
@@ -228,7 +387,6 @@ export const feedbackService = {
 
   async getSurveyAnalytics() {
     const feedbacks = await this.getFeedbacks('SURVEY');
-    // Group feedbacks by targetId
     const surveyMap = {};
 
     feedbacks.forEach(f => {

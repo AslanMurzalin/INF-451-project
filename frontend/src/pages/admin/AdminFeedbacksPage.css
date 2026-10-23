@@ -13,24 +13,107 @@
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   width: 100%;
-  max-width: 860px;
+  max-width: 980px;
   text-align: left;
+}
+
+/* Lecturer Context Banner */
+.lecturer-context-banner {
+  width: 100%;
+  max-width: 980px;
+  background-color: #eff6ff;
+  border: 1px solid #93c5fd;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+[data-theme="dark"] .lecturer-context-banner {
+  background-color: #1e293b;
+  border-color: #3b82f6;
+}
+
+.lecturer-banner-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 11.5px;
+  color: #1e3a8a;
+}
+
+[data-theme="dark"] .lecturer-banner-info {
+  color: #93c5fd;
+}
+
+.lecturer-badge {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  background-color: #1e3a8a;
+  color: #ffffff;
+  padding: 2px 7px;
+  text-transform: uppercase;
+}
+
+.lecturer-welcome {
+  font-weight: 500;
+}
+
+.lecturer-stats {
+  color: #475569;
+  font-size: 11px;
+}
+
+[data-theme="dark"] .lecturer-stats {
+  color: #cbd5e1;
+}
+
+.lecturer-toggle-btn {
+  padding: 5px 12px;
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background-color: #ffffff;
+  color: #1e3a8a;
+  border: 1px solid #1e3a8a;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.lecturer-toggle-btn:hover {
+  background-color: #dbeafe;
+}
+
+.lecturer-toggle-btn.active {
+  background-color: #1e3a8a;
+  color: #ffffff;
 }
 
 /* Toolbar */
 .admin-feedbacks-toolbar {
   width: 100%;
-  max-width: 860px;
+  max-width: 980px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: 10px;
+  margin-bottom: 8px;
   flex-wrap: wrap;
   border: 1px solid #71717a;
   background-color: #f8fafc;
   padding: 8px 12px;
+}
+
+[data-theme="dark"] .admin-feedbacks-toolbar {
+  background-color: #1e293b;
+  border-color: #475569;
 }
 
 .toolbar-group {
@@ -40,14 +123,19 @@
 }
 
 .toolbar-group label {
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 700;
   color: #1e3a8a;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .toolbar-group label {
+  color: #60a5fa;
 }
 
 .admin-select {
-  padding: 4px 8px;
+  padding: 4px 6px;
   border: 1px solid #71717a;
   background-color: #ffffff;
   font-family: var(--font-main);
@@ -56,16 +144,22 @@
   outline: none;
 }
 
+[data-theme="dark"] .admin-select {
+  background-color: #0f172a;
+  border-color: #475569;
+  color: #f8fafc;
+}
+
 .toolbar-search-group {
   flex: 1;
-  min-width: 200px;
+  min-width: 180px;
   display: flex;
   justify-content: flex-end;
 }
 
 .admin-search-input {
   width: 100%;
-  max-width: 260px;
+  max-width: 240px;
   padding: 4px 8px;
   border: 1px solid #71717a;
   background-color: #ffffff;
@@ -74,10 +168,124 @@
   outline: none;
 }
 
+[data-theme="dark"] .admin-search-input {
+  background-color: #0f172a;
+  border-color: #475569;
+  color: #f8fafc;
+}
+
+/* Custom Date Row */
+.custom-date-toolbar-row {
+  width: 100%;
+  max-width: 980px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  border: 1px dashed #71717a;
+  background-color: #f1f5f9;
+  padding: 6px 12px;
+  flex-wrap: wrap;
+}
+
+[data-theme="dark"] .custom-date-toolbar-row {
+  background-color: #0f172a;
+  border-color: #475569;
+}
+
+.custom-date-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.custom-date-group label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #475569;
+}
+
+[data-theme="dark"] .custom-date-group label {
+  color: #94a3b8;
+}
+
+.admin-date-input {
+  padding: 3px 6px;
+  border: 1px solid #71717a;
+  background-color: #ffffff;
+  font-family: var(--font-main);
+  font-size: 11px;
+  color: #111827;
+  outline: none;
+}
+
+[data-theme="dark"] .admin-date-input {
+  background-color: #1e293b;
+  border-color: #475569;
+  color: #f8fafc;
+}
+
+.clear-dates-btn {
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #b91c1c;
+  background: none;
+  border: 1px solid #ef4444;
+  cursor: pointer;
+}
+
+.clear-dates-btn:hover {
+  background-color: #fee2e2;
+}
+
+/* Filter Summary Bar */
+.filter-summary-bar {
+  width: 100%;
+  max-width: 980px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 10.5px;
+}
+
+.filter-count-badge {
+  color: #475569;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+[data-theme="dark"] .filter-count-badge {
+  color: #94a3b8;
+}
+
+.reset-filters-btn {
+  background: none;
+  border: 1px solid #71717a;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #1e3a8a;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.reset-filters-btn:hover {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-color: #ef4444;
+}
+
+[data-theme="dark"] .reset-filters-btn {
+  color: #60a5fa;
+  border-color: #475569;
+}
+
 /* Table */
 .admin-feedbacks-table-wrapper {
   width: 100%;
-  max-width: 860px;
+  max-width: 980px;
   overflow-x: auto;
 }
 
@@ -88,6 +296,11 @@
   background-color: #ffffff;
 }
 
+[data-theme="dark"] .admin-feedbacks-data-table {
+  background-color: #1e293b;
+  border-color: #475569;
+}
+
 .admin-feedbacks-data-table th,
 .admin-feedbacks-data-table td {
   border: 1px solid #71717a;
@@ -95,6 +308,11 @@
   font-family: var(--font-main);
   font-size: 11.5px;
   vertical-align: middle;
+}
+
+[data-theme="dark"] .admin-feedbacks-data-table th,
+[data-theme="dark"] .admin-feedbacks-data-table td {
+  border-color: #475569;
 }
 
 .admin-feedbacks-data-table th {
@@ -107,6 +325,11 @@
   font-size: 10.5px;
 }
 
+[data-theme="dark"] .admin-feedbacks-data-table th {
+  background-color: #0f172a;
+  color: #60a5fa;
+}
+
 .admin-clickable-row {
   cursor: pointer;
   transition: background-color 0.1s ease;
@@ -114,6 +337,10 @@
 
 .admin-clickable-row:hover {
   background-color: #f8fafc;
+}
+
+[data-theme="dark"] .admin-clickable-row:hover {
+  background-color: #334155;
 }
 
 .th-id, .td-id {
@@ -130,6 +357,7 @@
   padding: 2px 5px;
   border: 1px solid #71717a;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .badge-course {
@@ -162,6 +390,32 @@
   font-size: 11px;
 }
 
+[data-theme="dark"] .target-name {
+  color: #60a5fa;
+}
+
+.target-dept-tag {
+  font-size: 9.5px;
+  color: #475569;
+  font-weight: 600;
+  margin-top: 1px;
+}
+
+[data-theme="dark"] .target-dept-tag {
+  color: #94a3b8;
+}
+
+.target-lecturer-tag {
+  font-size: 9.5px;
+  color: #047857;
+  font-weight: 500;
+  margin-top: 1px;
+}
+
+[data-theme="dark"] .target-lecturer-tag {
+  color: #34d399;
+}
+
 .target-sub {
   font-size: 9.5px;
   color: #64748b;
@@ -171,6 +425,10 @@
   font-weight: 600;
   color: #0f172a;
   font-size: 11px;
+}
+
+[data-theme="dark"] .student-name {
+  color: #f8fafc;
 }
 
 .student-email {
@@ -188,6 +446,7 @@
   display: flex;
   align-items: center;
   gap: 3px;
+  white-space: nowrap;
 }
 
 .rating-val {
@@ -203,6 +462,10 @@
   overflow: hidden;
   font-size: 11px;
   line-height: 1.35;
+}
+
+[data-theme="dark"] .feedback-snippet {
+  color: #cbd5e1;
 }
 
 .has-response-badge {
@@ -225,6 +488,10 @@
 
 .status-sent {
   color: #111827;
+}
+
+[data-theme="dark"] .status-sent {
+  color: #e2e8f0;
 }
 
 .status-in_review {
@@ -269,12 +536,30 @@
   border: 1px solid #71717a;
   background-color: #ffffff;
   width: 100%;
-  max-width: 860px;
+  max-width: 980px;
+}
+
+[data-theme="dark"] .admin-loading-box,
+[data-theme="dark"] .admin-empty-box {
+  background-color: #1e293b;
+  border-color: #475569;
+  color: #94a3b8;
+}
+
+.empty-reset-btn {
+  margin-top: 10px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  background-color: #1e3a8a;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
 }
 
 /* Modal Content */
 .admin-review-modal {
-  max-width: 620px;
+  max-width: 660px;
 }
 
 .review-info-grid {
@@ -284,10 +569,18 @@
   margin-bottom: 14px;
 }
 
+[data-theme="dark"] .review-info-grid {
+  border-color: #475569;
+}
+
 .review-info-grid td {
   border: 1px solid #71717a;
   padding: 6px 10px;
   font-size: 11.5px;
+}
+
+[data-theme="dark"] .review-info-grid td {
+  border-color: #475569;
 }
 
 .rev-label {
@@ -297,6 +590,21 @@
   color: #1e3a8a;
   background-color: #f8fafc;
   text-transform: uppercase;
+}
+
+[data-theme="dark"] .rev-label {
+  background-color: #0f172a;
+  color: #60a5fa;
+}
+
+.modal-dept-chip {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  background-color: #e0e7ff;
+  color: #3730a3;
+  border: 1px solid #c7d2fe;
 }
 
 .criteria-list {
@@ -310,6 +618,12 @@
   border: 1px solid #cbd5e1;
   padding: 1px 5px;
   font-size: 10px;
+}
+
+[data-theme="dark"] .crit-chip {
+  background-color: #334155;
+  border-color: #475569;
+  color: #f8fafc;
 }
 
 .custom-answer-row {
@@ -326,6 +640,11 @@
   background-color: #f8fafc;
   white-space: pre-wrap;
   line-height: 1.4;
+}
+
+[data-theme="dark"] .student-comments-box {
+  background-color: #0f172a;
+  color: #f8fafc;
 }
 
 .admin-review-form {
@@ -347,6 +666,10 @@
   text-transform: uppercase;
 }
 
+[data-theme="dark"] .review-form-row label {
+  color: #60a5fa;
+}
+
 .modal-select,
 .modal-textarea {
   padding: 6px 8px;
@@ -354,6 +677,13 @@
   font-family: var(--font-main);
   font-size: 11.5px;
   outline: none;
+}
+
+[data-theme="dark"] .modal-select,
+[data-theme="dark"] .modal-textarea {
+  background-color: #0f172a;
+  border-color: #475569;
+  color: #f8fafc;
 }
 
 .modal-footer-actions {

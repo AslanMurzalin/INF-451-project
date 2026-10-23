@@ -8,6 +8,12 @@ export function AdminHomePage() {
   const now = new Date();
   const formattedLastLogin = `${String(now.getDate()).padStart(2, '0')}.${String(now.getMonth() + 1).padStart(2, '0')}.${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 
+  const deptName = user?.email?.includes('sarah.connor')
+    ? 'Data Science & Artificial Intelligence'
+    : user?.email?.includes('bob.student')
+    ? 'Information Systems'
+    : 'Computer Science & Engineering';
+
   return (
     <div className="admin-home-container">
       <div className="admin-profile-table-wrapper">
@@ -27,7 +33,7 @@ export function AdminHomePage() {
             </tr>
             <tr>
               <td className="admin-info-label">DEPARTMENT :</td>
-              <td className="admin-info-value">Computer Science & Engineering</td>
+              <td className="admin-info-value">{deptName}</td>
             </tr>
             <tr>
               <td className="admin-info-label">LAST LOGIN :</td>

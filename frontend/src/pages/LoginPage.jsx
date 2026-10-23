@@ -30,6 +30,9 @@ export function LoginPage() {
     if (role === 'STUDENT') {
       setUsername('alice.student@university.edu');
       setPassword('StudentPassword123!');
+    } else if (role === 'LECTURER') {
+      setUsername('alan.smith@university.edu');
+      setPassword('LecturerPassword123!');
     } else {
       setUsername('admin@university.edu');
       setPassword('AdminPassword123!');
@@ -48,7 +51,8 @@ export function LoginPage() {
     try {
       setLoading(true);
       const data = await login(username.trim(), password.trim());
-      const destination = data.role === 'admin' ? '/admin' : '/courses';
+      const isStaffOrAdmin = data.role === 'admin' || data.role === 'lecturer';
+      const destination = isStaffOrAdmin ? '/admin' : '/courses';
       navigate(destination, { replace: true });
     } catch (err) {
       console.error('Login error:', err);
@@ -144,6 +148,13 @@ export function LoginPage() {
           className={`login-role-item ${activeRole === 'ADMIN' ? 'active' : ''}`}
         >
           ADMIN
+        </button>
+        <button
+          type="button"
+          onClick={() => handleRoleSelect('LECTURER')}
+          className={`login-role-item ${activeRole === 'LECTURER' ? 'active' : ''}`}
+        >
+          LECTURER
         </button>
         <button
           type="button"

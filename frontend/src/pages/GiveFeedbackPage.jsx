@@ -172,20 +172,27 @@ export function GiveFeedbackPage() {
       let targetId = null;
       let targetTitle = '';
       let category = '';
+      let department = '';
+      let lecturerName = '';
 
       if (activeSource.target_entity === 'course') {
         targetId = selectedCourseId || courses[0]?.course_id;
         targetTitle = currentCourse ? currentCourse.title : (courses[0]?.title || 'Academic Course');
+        department = currentCourse?.department_name || 'Computer Science & Engineering';
+        lecturerName = currentCourse?.lecturer_name || '';
       } else if (activeSource.target_entity === 'survey') {
         targetId = selectedSurveyId || surveys[0]?.survey_id;
         targetTitle = currentSurvey ? currentSurvey.title : (surveys[0]?.title || 'Institutional Survey');
+        department = 'General / Campus Initiatives';
       } else if (activeSource.target_entity === 'service') {
         targetId = selectedServiceId || services[0]?.service_id;
         targetTitle = currentService ? currentService.name : (services[0]?.name || 'Campus Facility');
         category = currentService?.category || selectedCategory;
+        department = 'Campus Facilities & Services';
       } else {
         targetId = null;
         targetTitle = customTargetTitle.trim() || activeSource.display_name;
+        department = 'General University';
       }
 
       await feedbackService.submitFeedback({
@@ -193,6 +200,8 @@ export function GiveFeedbackPage() {
         sourceDisplayName: activeSource.display_name,
         targetId,
         targetTitle,
+        department,
+        lecturerName,
         studentName: user?.fullName || 'Alice Johnson',
         studentEmail: user?.email || 'alice.student@university.edu',
         category,

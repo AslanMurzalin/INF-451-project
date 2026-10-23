@@ -22,7 +22,7 @@ function RootRedirect() {
   const { user, isAuthenticated, loading } = useAuth();
   if (loading) return null;
   if (!isAuthenticated) return <Navigate to="/login" replace />;
-  if (user?.role === 'admin') return <Navigate to="/admin" replace />;
+  if (user?.role === 'admin' || user?.role === 'lecturer') return <Navigate to="/admin" replace />;
   return <Navigate to="/courses" replace />;
 }
 

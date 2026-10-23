@@ -9,7 +9,7 @@ export function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isAdmin = user?.role === 'admin' || location.pathname.startsWith('/admin');
+  const isAdmin = user?.role === 'admin' || user?.role === 'lecturer' || location.pathname.startsWith('/admin');
   const isHomeActive = isAdmin
     ? location.pathname === '/admin' || location.pathname === '/admin/'
     : location.pathname === '/courses';
