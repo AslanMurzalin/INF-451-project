@@ -74,6 +74,21 @@ export function AdminDashboardPage() {
               </div>
 
               <div
+                className="shortcut-card highlight-sentiment-card"
+                onClick={() => navigate('/admin/sentiment-breakdown')}
+              >
+                <div className="card-top">
+                  <span className="card-tag">AI SENTIMENT</span>
+                  <span className="card-count">US4.2</span>
+                </div>
+                <h4 className="card-title">SENTIMENT BREAKDOWN</h4>
+                <p className="card-desc">
+                  Side-by-side satisfaction breakdown across courses, services, and surveys
+                </p>
+                <span className="card-link-text">VIEW SENTIMENT BREAKDOWN →</span>
+              </div>
+
+              <div
                 className="shortcut-card"
                 onClick={() => navigate('/admin/sources')}
               >

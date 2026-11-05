@@ -63,6 +63,13 @@ export function Sidebar() {
             </NavLink>
 
             <NavLink
+              to="/admin/sentiment-breakdown"
+              className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
+            >
+              SENTIMENT BREAKDOWN
+            </NavLink>
+
+            <NavLink
               to="/admin/sources"
               className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
             >

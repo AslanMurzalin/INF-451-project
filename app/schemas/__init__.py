@@ -6,6 +6,13 @@ from app.schemas.course import CourseCreate, CourseUpdate, CourseResponse, Cours
 from app.schemas.service import ServiceCreate, ServiceUpdate, ServiceResponse
 from app.schemas.survey import SurveyCreate, SurveyUpdate, SurveyResponse
 from app.schemas.feedback_source import FeedbackSourceTypeInfo, FeedbackSourceSummary
+from app.schemas.sentiment import (
+    AIAnalysisResponse,
+    FeedbackCreate,
+    FeedbackResponse,
+    SentimentCategoryItem,
+    SentimentBreakdownResponse,
+)
 
 __all__ = [
     "MessageResponse",
@@ -35,4 +42,9 @@ __all__ = [
     "SurveyResponse",
     "FeedbackSourceTypeInfo",
     "FeedbackSourceSummary",
+    "AIAnalysisResponse",
+    "FeedbackCreate",
+    "FeedbackResponse",
+    "SentimentCategoryItem",
+    "SentimentBreakdownResponse",
 ]

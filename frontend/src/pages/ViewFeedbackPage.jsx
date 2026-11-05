@@ -141,6 +141,7 @@ export function ViewFeedbackPage() {
                 <th className="th-type">TYPE</th>
                 <th className="th-feedback">FEEDBACK & TARGET</th>
                 <th className="th-rating">RATING</th>
+                <th className="th-sentiment">AI SENTIMENT</th>
                 <th className="th-date">DATE</th>
                 <th className="th-status">STATUS</th>
                 <th className="th-actions">ACTION</th>
@@ -183,6 +184,17 @@ export function ViewFeedbackPage() {
                           />
                         ))}
                       </div>
+                    </td>
+                    <td className="td-sentiment">
+                      {item.sentimentStatus === 'PENDING' || item.sentiment === 'PENDING' ? (
+                        <span className="sentiment-pill pill-pending">⏳ Sentiment pending</span>
+                      ) : item.sentiment === 'POSITIVE' ? (
+                        <span className="sentiment-pill pill-positive">😊 POSITIVE</span>
+                      ) : item.sentiment === 'NEGATIVE' ? (
+                        <span className="sentiment-pill pill-negative">🙁 NEGATIVE</span>
+                      ) : (
+                        <span className="sentiment-pill pill-neutral">😐 NEUTRAL</span>
+                      )}
                     </td>
                     <td className="td-date">{item.feedbackDate}</td>
                     <td className={`td-status status-${item.status?.toLowerCase()}`}>

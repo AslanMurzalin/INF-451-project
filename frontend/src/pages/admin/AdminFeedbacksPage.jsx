@@ -20,6 +20,7 @@ export function AdminFeedbacksPage() {
   const [typeFilter, setTypeFilter] = useState('ALL');
   const [departmentFilter, setDepartmentFilter] = useState('ALL');
   const [statusFilter, setStatusFilter] = useState('ALL');
+  const [sentimentFilter, setSentimentFilter] = useState('ALL');
   const [ratingFilter, setRatingFilter] = useState('ALL');
   const [lecturerFilter, setLecturerFilter] = useState('ALL');
   const [searchTerm, setSearchTerm] = useState('');
@@ -109,6 +110,7 @@ export function AdminFeedbacksPage() {
     setTypeFilter('ALL');
     setDepartmentFilter('ALL');
     setStatusFilter('ALL');
+    setSentimentFilter('ALL');
     setRatingFilter('ALL');
     setLecturerFilter('ALL');
     setDatePreset('ALL');
@@ -216,6 +218,15 @@ export function AdminFeedbacksPage() {
         return false;
       }
 
+      // 4.5 Sentiment Filter
+      if (sentimentFilter !== 'ALL') {
+        if (sentimentFilter === 'PENDING') {
+          if (fb.sentimentStatus !== 'PENDING' && fb.sentiment !== 'PENDING') return false;
+        } else {
+          if (fb.sentiment !== sentimentFilter || fb.sentimentStatus === 'PENDING') return false;
+        }
+      }
+
       // 5. Rating Filter
       if (ratingFilter !== 'ALL') {
         const r = fb.rating || 5;
@@ -260,6 +271,7 @@ export function AdminFeedbacksPage() {
     typeFilter,
     departmentFilter,
     statusFilter,
+    sentimentFilter,
     ratingFilter,
     lecturerFilter,
     datePreset,
@@ -272,6 +284,7 @@ export function AdminFeedbacksPage() {
     typeFilter !== 'ALL' ||
     departmentFilter !== 'ALL' ||
     statusFilter !== 'ALL' ||
+    sentimentFilter !== 'ALL' ||
     ratingFilter !== 'ALL' ||
     lecturerFilter !== 'ALL' ||
     datePreset !== 'ALL' ||
@@ -423,6 +436,23 @@ export function AdminFeedbacksPage() {
           </select>
         </div>
 
+        {/* Sentiment Filter */}
+        <div className="toolbar-group">
+          <label htmlFor="admin-sentiment-filter">AI SENTIMENT :</label>
+          <select
+            id="admin-sentiment-filter"
+            value={sentimentFilter}
+            onChange={(e) => setSentimentFilter(e.target.value)}
+            className="admin-select"
+          >
+            <option value="ALL">ALL SENTIMENTS</option>
+            <option value="POSITIVE">😊 POSITIVE</option>
+            <option value="NEUTRAL">😐 NEUTRAL</option>
+            <option value="NEGATIVE">🙁 NEGATIVE</option>
+            <option value="PENDING">⏳ PENDING</option>
+          </select>
+        </div>
+
         {/* Rating Filter */}
         <div className="toolbar-group">
           <label htmlFor="admin-rating-filter">RATING :</label>
@@ -533,6 +563,7 @@ export function AdminFeedbacksPage() {
                 <th className="th-target">TARGET ENTITY & DEPARTMENT</th>
                 <th className="th-student">STUDENT</th>
                 <th className="th-rating">RATING</th>
+                <th className="th-sentiment">AI SENTIMENT</th>
                 <th className="th-feedback">FEEDBACK PREVIEW</th>
                 <th className="th-date">DATE</th>
                 <th className="th-status">STATUS</th>
@@ -578,6 +609,25 @@ export function AdminFeedbacksPage() {
                       <StarIcon size={12} filled={true} color="#f59e0b" />
                       <span className="rating-val">{item.rating || 5}/5</span>
                     </div>
+                  </td>
+                  <td className="td-sentiment">
+                    {item.sentimentStatus === 'PENDING' || item.sentiment === 'PENDING' ? (
+                      <span className="sentiment-pill pill-pending" title="AI analysis in progress">
+                        ⏳ Sentiment pending
+                      </span>
+                    ) : item.sentiment === 'POSITIVE' ? (
+                      <span className="sentiment-pill pill-positive" title={`Confidence: ${Math.round((item.sentimentScore || 0.9) * 100)}%`}>
+                        😊 POSITIVE {Math.round((item.sentimentScore || 0.9) * 100)}%
+                      </span>
+                    ) : item.sentiment === 'NEGATIVE' ? (
+                      <span className="sentiment-pill pill-negative" title={`Confidence: ${Math.round((item.sentimentScore || 0.9) * 100)}%`}>
+                        🙁 NEGATIVE {Math.round((item.sentimentScore || 0.9) * 100)}%
+                      </span>
+                    ) : (
+                      <span className="sentiment-pill pill-neutral" title={`Confidence: ${Math.round((item.sentimentScore || 0.7) * 100)}%`}>
+                        😐 NEUTRAL {Math.round((item.sentimentScore || 0.7) * 100)}%
+                      </span>
+                    )}
                   </td>
                   <td className="td-feedback">
                     <div className="feedback-snippet">{item.feedback}</div>
@@ -687,6 +737,31 @@ export function AdminFeedbacksPage() {
                         ))}
                       </div>
                       <strong>{selectedFeedback.rating || 5} / 5</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="rev-label">AI SENTIMENT SCORE :</td>
+                    <td className="rev-value">
+                      <div className="modal-sentiment-info">
+                        {selectedFeedback.sentimentStatus === 'PENDING' || selectedFeedback.sentiment === 'PENDING' ? (
+                          <span className="sentiment-pill pill-pending">⏳ Sentiment pending (Processing...)</span>
+                        ) : selectedFeedback.sentiment === 'POSITIVE' ? (
+                          <span className="sentiment-pill pill-positive">
+                            😊 POSITIVE ({Math.round((selectedFeedback.sentimentScore || 0.9) * 100)}% confidence)
+                          </span>
+                        ) : selectedFeedback.sentiment === 'NEGATIVE' ? (
+                          <span className="sentiment-pill pill-negative">
+                            🙁 NEGATIVE ({Math.round((selectedFeedback.sentimentScore || 0.9) * 100)}% confidence)
+                          </span>
+                        ) : (
+                          <span className="sentiment-pill pill-neutral">
+                            😐 NEUTRAL ({Math.round((selectedFeedback.sentimentScore || 0.7) * 100)}% confidence)
+                          </span>
+                        )}
+                        <span className="sentiment-auto-note">
+                          (Generated automatically by AI service — user cannot edit)
+                        </span>
+                      </div>
                     </td>
                   </tr>
                   {selectedFeedback.criteria && Object.keys(selectedFeedback.criteria).length > 0 && (

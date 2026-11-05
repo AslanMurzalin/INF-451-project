@@ -17,6 +17,7 @@ import AdminFeedbacksPage from './pages/admin/AdminFeedbacksPage';
 import AdminSurveyResultsPage from './pages/admin/AdminSurveyResultsPage';
 import AdminSourcesPage from './pages/admin/AdminSourcesPage';
 import AdminCoursesServicesPage from './pages/admin/AdminCoursesServicesPage';
+import AdminSentimentBreakdownPage from './pages/admin/AdminSentimentBreakdownPage';
 
 function RootRedirect() {
   const { user, isAuthenticated, loading } = useAuth();
@@ -56,6 +57,7 @@ export function App() {
               <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
               <Route path="/admin/feedbacks" element={<AdminFeedbacksPage />} />
               <Route path="/admin/surveys-results" element={<AdminSurveyResultsPage />} />
+              <Route path="/admin/sentiment-breakdown" element={<AdminSentimentBreakdownPage />} />
               <Route path="/admin/sources" element={<AdminSourcesPage />} />
               <Route path="/admin/courses-services" element={<AdminCoursesServicesPage />} />
               <Route path="/admin/settings" element={<SettingsPage />} />

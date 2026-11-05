@@ -100,3 +100,33 @@ A clean, modular, model-oriented FastAPI monolith implementing Sprint 1 Foundati
    ```powershell
    pytest tests/ -v
    ```
+
+
+---
+
+## Sprint 4 — Sentiment Analysis
+
+### Features Implemented
+- **US4.1 — Automatic Sentiment Scoring**:
+  - Rule-based & heuristic AI sentiment analysis engine (`app/services/sentiment_analyzer.py`) evaluating text content and ratings.
+  - Automatic classification into `POSITIVE`, `NEUTRAL`, or `NEGATIVE` with confidence scoring (0.0 – 1.0).
+  - Non-blocking submission: feedback submissions store an initial `PENDING` analysis status (`"Sentiment pending"`) so student submission is never blocked, followed by automatic asynchronous scoring.
+  - Sentiment badges displayed next to each entry in feedback repository lists for lecturers and administrators with confidence metrics.
+  - Filter by sentiment status (`POSITIVE`, `NEUTRAL`, `NEGATIVE`, `PENDING`) in the moderation repository.
+
+- **US4.2 — Sentiment Breakdown by Category**:
+  - Aggregation endpoint `GET /api/v1/analytics/sentiment-breakdown?category_type={course|service|survey}` protected by Admin role check (`require_admin`).
+  - Interactive Admin Sentiment Breakdown page (`/admin/sentiment-breakdown`) featuring category switch tabs (`Courses`, `Campus Services`, `Ad-hoc Surveys`).
+  - Stacked sentiment distribution charts showing positive, neutral, and negative shares side-by-side.
+  - Comprehensive satisfaction benchmark matrix table with health status indicators (`EXCELLENT`, `SATISFACTORY`, `ATTENTION NEEDED`).
+  - Strict calculation rule: Percentages are calculated only from entries with completed sentiment scoring (pending submissions are excluded from percentage denominator).
+  - Category empty-state handling: Items with no feedback data display a `"No data"` badge without percentages or errors.
+
+### Sprint 4 Endpoints
+| Method | Endpoint | Description | Access |
+|---|---|---|---|
+| `POST` | `/api/v1/feedbacks` | Submit student/staff feedback & trigger AI sentiment scoring | Authenticated |
+| `GET` | `/api/v1/feedbacks` | List feedback entries with sentiment labels and filter parameters | Lecturer, Admin |
+| `GET` | `/api/v1/feedbacks/{id}` | Retrieve single feedback entry with detailed AI analysis | Authenticated |
+| `POST` | `/api/v1/feedbacks/{id}/analyze` | Trigger or re-run AI sentiment scoring | Lecturer, Admin |
+| `GET` | `/api/v1/analytics/sentiment-breakdown` | Category sentiment breakdown and satisfaction percentages | Admin Only |

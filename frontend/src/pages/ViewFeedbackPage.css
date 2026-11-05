@@ -568,3 +568,55 @@
     align-items: stretch;
   }
 }
+
+
+/* Sprint 4 AI Sentiment Pill Styles */
+.th-sentiment {
+  width: 130px;
+}
+
+.td-sentiment {
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.sentiment-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.sentiment-pill.pill-positive {
+  background-color: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.sentiment-pill.pill-neutral {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.sentiment-pill.pill-negative {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.sentiment-pill.pill-pending {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  animation: pulse-sentiment 1.8s infinite;
+}
+
+@keyframes pulse-sentiment {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}

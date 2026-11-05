@@ -7,6 +7,8 @@ from app.api.v1.endpoints import (
     services,
     surveys,
     feedback_sources,
+    feedbacks,
+    analytics,
 )
 
 api_router = APIRouter()
@@ -18,3 +20,5 @@ api_router.include_router(courses.router, prefix="/courses", tags=["Courses (Dat
 api_router.include_router(services.router, prefix="/services", tags=["Campus Services (Data Sources)"])
 api_router.include_router(surveys.router, prefix="/surveys", tags=["Surveys (Data Sources)"])
 api_router.include_router(feedback_sources.router, prefix="/sources", tags=["Feedback Sources Configuration"])
+api_router.include_router(feedbacks.router, prefix="/feedbacks", tags=["Feedback & AI Sentiment"])
+api_router.include_router(analytics.router, prefix="/analytics", tags=["Sentiment Analytics & Breakdown"])
