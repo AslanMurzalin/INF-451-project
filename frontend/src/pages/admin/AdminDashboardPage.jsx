@@ -89,6 +89,21 @@ export function AdminDashboardPage() {
               </div>
 
               <div
+                className="shortcut-card highlight-topics-card"
+                onClick={() => navigate('/admin/topics')}
+              >
+                <div className="card-top">
+                  <span className="card-tag">AI TOPICS</span>
+                  <span className="card-count">US5.1</span>
+                </div>
+                <h4 className="card-title">TOPICS &amp; PROBLEMS</h4>
+                <p className="card-desc">
+                  Recurring issues, grading delays, and campus feedback clustered by AI
+                </p>
+                <span className="card-link-text">VIEW TOPIC CLUSTERS →</span>
+              </div>
+
+              <div
                 className="shortcut-card"
                 onClick={() => navigate('/admin/sources')}
               >

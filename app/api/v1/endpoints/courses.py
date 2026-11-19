@@ -2,13 +2,15 @@ from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 from app.core.database import get_db
-from app.core.dependencies import get_current_user, require_admin
+from app.core.dependencies import get_current_user, require_admin, require_lecturer_or_admin
 from app.crud.crud_course import course_crud
 from app.crud.crud_department import department_crud
 from app.crud.crud_user import user_crud
+from app.crud.crud_course_summary import course_summary_crud
 from app.models.user import User
 from app.models.enums import UserRole
 from app.schemas.course import CourseCreate, CourseUpdate, CourseResponse, CourseDetailResponse
+from app.schemas.summary import CourseSummaryResponse
 from app.schemas.common import PaginatedResponse, MessageResponse
 
 router = APIRouter()
@@ -148,3 +150,38 @@ def delete_course(
             detail="Course not found."
         )
     return MessageResponse(message=f"Course {course_id} deleted successfully.")
+
+
+@router.get("/{course_id}/summary", response_model=CourseSummaryResponse)
+def get_course_ai_summary(
+    course_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_lecturer_or_admin),
+):
+    """
+    US5.2: Get an AI-generated summary of all feedback for a course.
+    Shows the gist, main positive points, and main problems.
+    Marked as AI-generated.
+    """
+    return course_summary_crud.generate_summary(
+        db=db,
+        course_id=course_id,
+        current_user=current_user
+    )
+
+
+@router.post("/{course_id}/summarize", response_model=CourseSummaryResponse)
+def summarize_course_feedback(
+    course_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_lecturer_or_admin),
+):
+    """
+    US5.2: Action endpoint to request AI summarization of course feedback.
+    """
+    return course_summary_crud.generate_summary(
+        db=db,
+        course_id=course_id,
+        current_user=current_user
+    )
+

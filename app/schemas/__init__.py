@@ -13,6 +13,15 @@ from app.schemas.sentiment import (
     SentimentCategoryItem,
     SentimentBreakdownResponse,
 )
+from app.schemas.topic import (
+    TopicItem,
+    TopicListResponse,
+    TopicFeedbackItem,
+    TopicDetailResponse,
+)
+from app.schemas.summary import (
+    CourseSummaryResponse,
+)
 
 __all__ = [
     "MessageResponse",
@@ -47,4 +56,9 @@ __all__ = [
     "FeedbackResponse",
     "SentimentCategoryItem",
     "SentimentBreakdownResponse",
+    "TopicItem",
+    "TopicListResponse",
+    "TopicFeedbackItem",
+    "TopicDetailResponse",
+    "CourseSummaryResponse",
 ]

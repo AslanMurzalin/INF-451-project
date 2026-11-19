@@ -70,6 +70,13 @@ export function Sidebar() {
             </NavLink>
 
             <NavLink
+              to="/admin/topics"
+              className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
+            >
+              TOPICS &amp; PROBLEMS
+            </NavLink>
+
+            <NavLink
               to="/admin/sources"
               className={({ isActive }) => `sis-sidebar-nav-item ${isActive ? 'active' : ''}`}
             >

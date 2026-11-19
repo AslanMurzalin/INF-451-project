@@ -48,9 +48,11 @@ class CRUDFeedback:
         db.commit()
         db.refresh(feedback)
 
-        # Trigger AI scoring
+        # Trigger AI scoring & topic detection
         if auto_analyze:
             self.process_sentiment_analysis(db, feedback.feedback_id)
+            from app.crud.crud_topic import topic_crud
+            topic_crud.assign_topics_to_feedback(db, feedback.feedback_id)
             db.refresh(feedback)
 
         return feedback

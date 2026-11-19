@@ -2,3 +2,9 @@
 .idea/
 __pycache__/
 feedback_system.db
+.venv/
+venv/
+env/
+.pytest_cache/
+node_modules/
+dist/

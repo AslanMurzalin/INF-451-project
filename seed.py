@@ -114,6 +114,11 @@ def seed_database():
                 "title": "AI401 - Deep Learning & Natural Language Understanding",
                 "lecturer_email": "sarah.connor@university.edu",
                 "dept": "Data Science & Artificial Intelligence"
+            },
+            {
+                "title": "DS201 - Probability & Statistical Modeling",
+                "lecturer_email": "alan.smith@university.edu",
+                "dept": "Mathematics & Statistics"
             }
         ]
 
@@ -249,6 +254,17 @@ def seed_database():
                     "score": 0.92,
                     "status": AnalysisStatus.DONE
                 },
+                {
+                    "user_id": user_map["bob.student@university.edu"].user_id,
+                    "source_type": FeedbackSourceType.COURSE_EVALUATION,
+                    "course_id": course_map["CS302 - Operating Systems & Distributed Architecture"].course_id,
+                    "raw_text": "The theoretical materials are brilliant, but we had serious grading delays on the semaphore project assignment.",
+                    "rating": 2,
+                    "is_anonymous": False,
+                    "sentiment": SentimentLabel.NEGATIVE,
+                    "score": 0.89,
+                    "status": AnalysisStatus.DONE
+                },
                 # Course 3: AI401 (Positive, Negative, and 1 Pending)
                 {
                     "user_id": user_map["alice.student@university.edu"].user_id,
@@ -306,6 +322,17 @@ def seed_database():
                     "is_anonymous": True,
                     "sentiment": SentimentLabel.NEGATIVE,
                     "score": 0.86,
+                    "status": AnalysisStatus.DONE
+                },
+                {
+                    "user_id": user_map["alice.student@university.edu"].user_id,
+                    "source_type": FeedbackSourceType.SERVICE_REVIEW,
+                    "service_id": service_map["Main Campus Cafeteria"].service_id,
+                    "raw_text": "The cafeteria food and dining hall cleanliness have improved noticeably this month. Fresh salad bar is great.",
+                    "rating": 4,
+                    "is_anonymous": False,
+                    "sentiment": SentimentLabel.POSITIVE,
+                    "score": 0.88,
                     "status": AnalysisStatus.DONE
                 },
                 # 3. IT Helpdesk & Systems Support
@@ -371,8 +398,13 @@ def seed_database():
                     processed_at=now - timedelta(days=2) if fb_info["status"] == AnalysisStatus.DONE else now,
                 )
                 db.add(analysis)
+                db.flush()
 
-            print(f"  + Added {len(feedbacks_to_seed)} Feedbacks with AI Sentiment Analyses")
+                # US5.1: Detect and assign AI topics to each feedback entry
+                from app.crud.crud_topic import topic_crud
+                topic_crud.assign_topics_to_feedback(db, fb.feedback_id)
+
+            print(f"  + Added {len(feedbacks_to_seed)} Feedbacks with AI Sentiment & Topic Analyses")
 
         db.commit()
         print("[SUCCESS] Database seeding completed successfully!")

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import coursesService from '../services/courses';
 import feedbackService from '../services/feedback';
+import CourseSummaryModal from '../components/CourseSummaryModal';
 import './MyCoursesPage.css';
 
 export function MyCoursesPage() {
@@ -12,6 +13,9 @@ export function MyCoursesPage() {
   const [evaluatedCourseIds, setEvaluatedCourseIds] = useState(new Set());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [summaryCourse, setSummaryCourse] = useState(null);
+
+  const isLecturerOrAdmin = user?.role === 'lecturer' || user?.role === 'admin';
 
   useEffect(() => {
     async function fetchData() {
@@ -102,6 +106,7 @@ export function MyCoursesPage() {
                   <th>DEPARTMENT</th>
                   <th>ENROLLMENT</th>
                   <th>EVALUATION</th>
+                  {isLecturerOrAdmin && <th>AI SUMMARY (US5.2)</th>}
                 </tr>
               </thead>
               <tbody>
@@ -129,6 +134,18 @@ export function MyCoursesPage() {
                           </button>
                         )}
                       </td>
+                      {isLecturerOrAdmin && (
+                        <td>
+                          <button
+                            type="button"
+                            className="course-summarize-btn"
+                            onClick={() => setSummaryCourse(course)}
+                            title="Request AI-generated summary of all feedback for this course (US5.2)"
+                          >
+                            ✨ Summarize feedback
+                          </button>
+                        </td>
+                      )}
                     </tr>
                   );
                 })}
@@ -137,6 +154,13 @@ export function MyCoursesPage() {
           </div>
         )}
       </div>
+
+      {summaryCourse && (
+        <CourseSummaryModal
+          course={summaryCourse}
+          onClose={() => setSummaryCourse(null)}
+        />
+      )}
     </div>
   );
 }

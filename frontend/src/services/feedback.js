@@ -785,6 +785,48 @@ export const feedbackService = {
         criteriaScores: criteriaFinal
       };
     });
+  },
+
+  // US5.1: Topic Detection & Drill-Down
+  async getTopics(minCount = 2) {
+    try {
+      const data = await request(`/topics?min_count=${minCount}`);
+      return data;
+    } catch (err) {
+      console.warn('Backend topics endpoint failed:', err);
+      return { total_topics: 0, total_entries_tagged: 0, items: [] };
+    }
+  },
+
+  async getTopicDetail(topicId) {
+    try {
+      const data = await request(`/topics/${topicId}`);
+      return data;
+    } catch (err) {
+      console.error('Failed to fetch topic detail:', err);
+      throw err;
+    }
+  },
+
+  async reindexTopics() {
+    try {
+      const data = await request('/topics/reindex', { method: 'POST' });
+      return data;
+    } catch (err) {
+      console.error('Failed to reindex topics:', err);
+      throw err;
+    }
+  },
+
+  // US5.2: AI-Generated Course Feedback Summary
+  async getCourseSummary(courseId) {
+    try {
+      const data = await request(`/courses/${courseId}/summary`);
+      return data;
+    } catch (err) {
+      console.error('Failed to fetch course summary:', err);
+      throw err;
+    }
   }
 };
 

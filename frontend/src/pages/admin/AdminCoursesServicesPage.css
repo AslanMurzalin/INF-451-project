@@ -108,3 +108,30 @@
   color: #64748b;
   font-size: 13px;
 }
+
+.th-cs-actions, .td-cs-actions {
+  text-align: center;
+}
+
+.cs-ai-summary-btn {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.cs-ai-summary-btn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.cs-na-text {
+  color: #94a3b8;
+  font-size: 12px;
+}

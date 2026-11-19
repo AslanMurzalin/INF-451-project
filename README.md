@@ -130,3 +130,33 @@ A clean, modular, model-oriented FastAPI monolith implementing Sprint 1 Foundati
 | `GET` | `/api/v1/feedbacks/{id}` | Retrieve single feedback entry with detailed AI analysis | Authenticated |
 | `POST` | `/api/v1/feedbacks/{id}/analyze` | Trigger or re-run AI sentiment scoring | Lecturer, Admin |
 | `GET` | `/api/v1/analytics/sentiment-breakdown` | Category sentiment breakdown and satisfaction percentages | Admin Only |
+
+---
+
+## Sprint 5 — Topic Detection & Summarization
+
+### Features Implemented
+- **US5.1 — Topic Detection**:
+  - Rule-based & heuristic AI Topic Detection engine (`app/services/topic_detector.py`) analyzing feedback text into recurring themes and common problems (e.g. `"Grading Delays"`, `"Cafeteria Hygiene & Food Quality"`, `"Teaching Quality & Lecture Clarity"`, `"Practical Labs & Hands-on Exercises"`, `"Campus Wi-Fi & IT Support"`).
+  - Automated topic association on feedback creation: feedback submissions automatically detect themes and link to `topics` and `feedback_topics` with relevance scoring.
+  - Strict recurrence constraint: In accordance with US5.1 specifications, topics are displayed only if they appear in more than one feedback entry (`min_count >= 2`).
+  - Staff & Admin Topic Management Dashboard (`/admin/topics`): Overview KPI cards, recurring problem highlights, occurrence threshold filter, and drill-down modal showing all associated student feedback entries.
+  - Re-indexing capability to re-run AI topic detection across all stored feedback entries.
+
+- **US5.2 — AI-Generated Course Feedback Summary**:
+  - AI-Powered Course Feedback Summarization engine (`app/services/course_summarizer.py`).
+  - Generates an executive overview, synthesizes main positive points (strengths commended by students), and highlights main problem areas (delays, pacing, workload).
+  - Strict course scoping: The summary is generated exclusively from the feedback belonging to the selected course without cross-contamination.
+  - Course-level RBAC: Lecturers can request summaries for courses they teach; Administrators have institutional access.
+  - Explicit AI labeling: All summaries are marked with `is_ai_generated: true` and prominent badges in the UI.
+  - Empty state handling: Courses without feedback return HTTP 400 with the exact specification message `"Not enough feedback to summarize"`.
+  - Interactive Course Summary Modal accessible directly from Course Management (`/admin/courses-services`) and Enrolled Courses (`/courses`).
+
+### Sprint 5 Endpoints
+| Method | Endpoint | Description | Access |
+|---|---|---|---|
+| `GET` | `/api/v1/topics` | List detected recurring topics (count > 1 per US5.1 constraint) | Lecturer, Admin |
+| `GET` | `/api/v1/topics/{topic_id}` | Retrieve topic details and drill down into all related feedback entries | Lecturer, Admin |
+| `POST` | `/api/v1/topics/reindex` | Trigger bulk AI topic detection across all feedback entries | Lecturer, Admin |
+| `GET` | `/api/v1/courses/{course_id}/summary` | Retrieve AI-generated summary of all feedback for a course | Lecturer, Admin |
+| `POST` | `/api/v1/courses/{course_id}/summarize` | Trigger or refresh AI summary for a course | Lecturer, Admin |
