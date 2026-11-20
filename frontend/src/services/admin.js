@@ -181,6 +181,7 @@ export const adminService = {
       const courseData = await request('/courses?page=1&page_size=50');
       courses = (courseData?.items || []).map(c => ({
         id: `course-${c.course_id}`,
+        course_id: c.course_id,
         name: c.title.toUpperCase(),
         feedbackType: 'COURSE EVALUATION',
         target_entity: 'course',
@@ -191,8 +192,8 @@ export const adminService = {
     } catch (err) {
       console.warn('Failed to load courses for admin view:', err);
       courses = [
-        { id: 'course-1', name: 'INF451 - ADVANCED SOFTWARE ARCHITECTURE', feedbackType: 'COURSE EVALUATION', target_entity: 'course', status: 'ACTIVE', lecturer: 'Dr. Alan Turing', department: 'Software Engineering' },
-        { id: 'course-2', name: 'CS302 - OPERATING SYSTEMS & DISTRIBUTED SYSTEMS', feedbackType: 'COURSE EVALUATION', target_entity: 'course', status: 'ACTIVE', lecturer: 'Prof. Linus Torvalds', department: 'Computer Science' },
+        { id: 'course-1', course_id: 1, name: 'INF451 - ADVANCED SOFTWARE ARCHITECTURE', feedbackType: 'COURSE EVALUATION', target_entity: 'course', status: 'ACTIVE', lecturer: 'Dr. Alan Smith', department: 'Computer Science & Engineering' },
+        { id: 'course-2', course_id: 2, name: 'CS302 - OPERATING SYSTEMS & DISTRIBUTED ARCHITECTURE', feedbackType: 'COURSE EVALUATION', target_entity: 'course', status: 'ACTIVE', lecturer: 'Dr. Alan Smith', department: 'Computer Science & Engineering' },
       ];
     }
 

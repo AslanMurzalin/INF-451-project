@@ -16,6 +16,7 @@ class CourseSummaryResponse(BaseModel):
     overview: str
     positive_points: List[str]
     negative_points: List[str]
+    student_quotes: Optional[List[str]] = None
     is_ai_generated: bool = True
     generated_at: datetime
 

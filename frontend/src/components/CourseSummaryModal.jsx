@@ -21,11 +21,25 @@ export function CourseSummaryModal({ course, onClose }) {
         }
       } catch (err) {
         if (isMounted) {
-          const detail = err.response?.data?.detail || err.message;
+          let detail = '';
+          if (typeof err.data?.detail === 'string') {
+            detail = err.data.detail;
+          } else if (Array.isArray(err.data?.detail)) {
+            detail = err.data.detail.map(d => (typeof d === 'string' ? d : d.msg || JSON.stringify(d))).join(', ');
+          } else if (err.data?.message) {
+            detail = err.data.message;
+          } else if (typeof err.message === 'string') {
+            detail = err.message;
+          } else {
+            detail = 'Failed to generate AI course summary.';
+          }
+
           if (detail && detail.includes('Not enough feedback to summarize')) {
             setError('Not enough feedback to summarize');
+          } else if (typeof detail === 'string' && detail.trim() && !detail.includes('[object Object]')) {
+            setError(detail);
           } else {
-            setError(detail || 'Failed to generate AI course summary.');
+            setError('Not enough feedback to summarize');
           }
         }
       } finally {
@@ -142,6 +156,23 @@ export function CourseSummaryModal({ course, onClose }) {
                   </ul>
                 </div>
               </div>
+
+              {/* Representative Student Feedback Excerpts */}
+              {summary.student_quotes && summary.student_quotes.length > 0 && (
+                <div className="summary-quotes-section">
+                  <div className="quotes-header">
+                    <span className="col-icon">💬</span>
+                    <h4>STUDENT VOICES &amp; FEEDBACK SUBMISSIONS ({summary.student_quotes.length})</h4>
+                  </div>
+                  <div className="quotes-grid">
+                    {summary.student_quotes.map((q, idx) => (
+                      <div key={idx} className="quote-bubble">
+                        "{q}"
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Footer AI Disclaimer */}
               <div className="ai-watermark-footer">

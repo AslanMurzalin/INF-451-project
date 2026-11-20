@@ -6,5 +6,9 @@ feedback_system.db
 venv/
 env/
 .pytest_cache/
-node_modules/
+**/node_modules/
+**/.vite/
 dist/
+**/dist/
+*.pdf
+

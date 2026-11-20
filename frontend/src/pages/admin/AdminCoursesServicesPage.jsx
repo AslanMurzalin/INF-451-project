@@ -24,8 +24,17 @@ export function AdminCoursesServicesPage() {
   }, []);
 
   const handleOpenSummary = (item) => {
+    let numericCourseId = 1;
+    if (item.course_id) {
+      numericCourseId = Number(item.course_id);
+    } else if (typeof item.id === 'string' && item.id.startsWith('course-')) {
+      numericCourseId = parseInt(item.id.replace('course-', ''), 10) || 1;
+    } else if (typeof item.id === 'number') {
+      numericCourseId = item.id;
+    }
+
     setSelectedCourseForSummary({
-      course_id: item.id || 1,
+      course_id: numericCourseId,
       title: item.name,
       department_name: item.department || 'Academic Department',
       lecturer_name: item.lecturer || 'Faculty Lecturer',

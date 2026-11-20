@@ -320,6 +320,47 @@
   line-height: 1;
 }
 
+.summary-quotes-section {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.quotes-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.quotes-header h4 {
+  font-size: 13px;
+  font-weight: 800;
+  margin: 0;
+  color: #334155;
+  letter-spacing: 0.04em;
+}
+
+.quotes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quote-bubble {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid #6366f1;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #334155;
+  font-style: italic;
+}
+
 .ai-watermark-footer {
   display: flex;
   justify-content: space-between;

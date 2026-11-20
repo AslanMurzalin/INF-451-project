@@ -154,7 +154,7 @@ def delete_course(
 
 @router.get("/{course_id}/summary", response_model=CourseSummaryResponse)
 def get_course_ai_summary(
-    course_id: int,
+    course_id: str,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_lecturer_or_admin),
 ):
@@ -162,26 +162,42 @@ def get_course_ai_summary(
     US5.2: Get an AI-generated summary of all feedback for a course.
     Shows the gist, main positive points, and main problems.
     Marked as AI-generated.
+    Defensively accepts numeric ID (1) or slugged ID ('course-1').
     """
+    try:
+        clean_id = int(str(course_id).replace("course-", ""))
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Invalid course ID: {course_id}"
+        )
     return course_summary_crud.generate_summary(
         db=db,
-        course_id=course_id,
+        course_id=clean_id,
         current_user=current_user
     )
 
 
 @router.post("/{course_id}/summarize", response_model=CourseSummaryResponse)
 def summarize_course_feedback(
-    course_id: int,
+    course_id: str,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_lecturer_or_admin),
 ):
     """
     US5.2: Action endpoint to request AI summarization of course feedback.
+    Defensively accepts numeric ID (1) or slugged ID ('course-1').
     """
+    try:
+        clean_id = int(str(course_id).replace("course-", ""))
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Invalid course ID: {course_id}"
+        )
     return course_summary_crud.generate_summary(
         db=db,
-        course_id=course_id,
+        course_id=clean_id,
         current_user=current_user
     )
 

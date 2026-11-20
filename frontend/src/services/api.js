@@ -37,7 +37,18 @@ export async function request(endpoint, options = {}) {
     const data = await response.json().catch(() => null);
 
     if (!response.ok) {
-      const errorMsg = data?.detail || data?.message || `Request failed with status ${response.status}`;
+      let errorMsg = 'Request failed';
+      if (typeof data?.detail === 'string') {
+        errorMsg = data.detail;
+      } else if (Array.isArray(data?.detail)) {
+        errorMsg = data.detail.map(d => (typeof d === 'string' ? d : d.msg || JSON.stringify(d))).join(', ');
+      } else if (data?.message) {
+        errorMsg = data.message;
+      } else if (data?.detail && typeof data.detail === 'object') {
+        errorMsg = data.detail.msg || JSON.stringify(data.detail);
+      } else {
+        errorMsg = `Request failed with status ${response.status}`;
+      }
       const error = new Error(errorMsg);
       error.status = response.status;
       error.data = data;

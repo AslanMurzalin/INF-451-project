@@ -92,6 +92,9 @@ class CourseSummarizer:
             f"The primary strengths center around teaching delivery, while areas for enhancement focus on feedback turnaround and pacing."
         )
 
+        # Sample student quotes
+        quotes = [fb.get("raw_text", "").strip() for fb in feedbacks if fb.get("raw_text")][:6]
+
         return {
             "course_title": course_title,
             "total_feedbacks": total_count,
@@ -102,6 +105,7 @@ class CourseSummarizer:
             "overview": overview,
             "positive_points": pos_points,
             "negative_points": neg_points,
+            "student_quotes": quotes,
             "can_summarize": True,
             "is_ai_generated": True,
             "generated_at": datetime.now(timezone.utc).isoformat()

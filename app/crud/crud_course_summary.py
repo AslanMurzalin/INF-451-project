@@ -79,6 +79,7 @@ class CRUDCourseSummary:
             overview=summary["overview"],
             positive_points=summary["positive_points"],
             negative_points=summary["negative_points"],
+            student_quotes=summary.get("student_quotes", []),
             is_ai_generated=True,
             generated_at=datetime.now(timezone.utc)
         )
